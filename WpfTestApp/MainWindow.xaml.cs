@@ -23,6 +23,24 @@ namespace WpfTestApp
         public MainWindow()
         {
             InitializeComponent();
+
+            //viewModel.People.Add(new Person() { Name = "Sombre perof", Occupation = "Prelnatrik" });
+            //viewModel.People.Add(new Person() { Name = "4eombrwewe pweweerof", Occupation = "wawer" });
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+         //   viewModel.SelectedPerson = viewModel.PeopleList[0];
+        }
+
+        private void AddPersonButton_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.addPerson();
+        }
+
+        private void RemovePersonButton_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.removeSelectedPerson();
         }
     }
 }
