@@ -21,7 +21,6 @@ namespace WpfTestApp
             return newPerson;
             }
         public void removePerson(Person toRemove) {
-            Console.WriteLine(toRemove);
             if(this.Contains(toRemove)) this.Remove(toRemove);
         }
 
