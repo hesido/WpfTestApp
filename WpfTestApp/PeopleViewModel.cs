@@ -63,7 +63,7 @@ namespace WpfTestApp
             if (PeopleList.Count > 0)
                 SelectedPerson = PeopleList[0];
             else
-                SelectedPerson = null;
+                SelectedPerson = null; 
             //}
         }
 
