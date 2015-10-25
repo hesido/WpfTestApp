@@ -14,7 +14,7 @@ namespace WpfTestApp
 
         public PeopleViewModel()
         {
-            _removePersonCommand = new WPFCommand(new Action<object> (removePersonAction));
+            _removePersonCommand = new WPFCommand(new Action<object> (removePersonAction), x => PeopleList.Count < 4);
         }
 
         public WPFCommand RemovePersonCommand
@@ -63,7 +63,7 @@ namespace WpfTestApp
             if (PeopleList.Count > 0)
                 SelectedPerson = PeopleList[0];
             else
-                SelectedPerson = null; 
+                SelectedPerson = null;
             //}
         }
 
