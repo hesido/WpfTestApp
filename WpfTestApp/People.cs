@@ -12,6 +12,7 @@ namespace WpfTestApp
 
         public People()
         {
+            //nothing to see here.
         }
 
         public Person addPerson() {
