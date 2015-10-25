@@ -14,7 +14,7 @@ namespace WpfTestApp
 
         public PeopleViewModel()
         {
-            _removePersonCommand = new WPFCommand(new Action<object>(removeSelectedPersonAction));
+            _removePersonCommand = new WPFCommand(new Action<object> (removePersonAction));
         }
 
         public WPFCommand RemovePersonCommand
@@ -55,24 +55,25 @@ namespace WpfTestApp
             SelectedPerson = PeopleList.addPerson();
         }
 
-       public void removeSelectedPerson()
-        {
-            return;
-            //if (_selectedPerson != null)
-            //{
-                PeopleList.removePerson(SelectedPerson);
-                if (PeopleList.Count > 0)
-                    SelectedPerson = PeopleList[0];
-                else
-                    SelectedPerson = null;
-            //}
-        }
-
-        public void removeSelectedPersonAction(object dummy = null)
+        public void removeSelectedPersonAction()
         {
             //if (_selectedPerson != null)
             //{
             PeopleList.removePerson(SelectedPerson);
+            if (PeopleList.Count > 0)
+                SelectedPerson = PeopleList[0];
+            else
+                SelectedPerson = null;
+            //}
+        }
+
+        public void removePersonAction(object toRemove)
+        {
+            //if (_selectedPerson != null)
+            //{
+
+            Console.WriteLine((toRemove as Person).Name);
+            PeopleList.removePerson(toRemove as Person);
             if (PeopleList.Count > 0)
                 SelectedPerson = PeopleList[0];
             else

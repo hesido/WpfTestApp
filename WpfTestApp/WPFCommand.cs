@@ -13,6 +13,7 @@ namespace WpfTestApp
         //Source: http://www.wpftutorial.net/delegatecommand.html
         private readonly Predicate<object> _canExecute;
         private readonly Action<object> _execute;
+        private readonly Action _executeNoParam;
 
         public event EventHandler CanExecuteChanged;
 
@@ -21,18 +22,18 @@ namespace WpfTestApp
 
         //}
 
-        public WPFCommand(Action<object> execute) : this(execute, null)
+        public WPFCommand(Action execute, Predicate<object> canExecute = null)
         {
+            _executeNoParam = execute;
+            _canExecute = canExecute;
         }
 
-
-
-        public WPFCommand(Action<object> execute,
-                       Predicate<object> canExecute)
+        public WPFCommand(Action<object> execute, Predicate<object> canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
         }
+
 
         public bool CanExecute(object parameter)
         {
@@ -46,7 +47,8 @@ namespace WpfTestApp
 
         public void Execute(object parameter)
         {
-            _execute(parameter);
+            if (_executeNoParam != null) _executeNoParam();
+            else _execute(parameter);
         }
 
         public void RaiseCanExecuteChanged()

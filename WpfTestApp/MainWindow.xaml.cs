@@ -38,9 +38,5 @@ namespace WpfTestApp
             viewModel.addPerson();
         }
 
-        private void RemovePersonButton_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.removeSelectedPerson();
-        }
     }
 }
