@@ -10,17 +10,24 @@ namespace WpfTestApp
     class PeopleViewModel : PeopleViewModelEntity
     {
 
+        private WPFCommand _removeSelectedPersonCommand;
         private WPFCommand _removePersonCommand;
 
-        public PeopleViewModel()
+        public WPFCommand RemoveSelectedPersonCommand
         {
-            _removePersonCommand = new WPFCommand(new Action<object>(removeSelectedPersonAction));
+            get { return _removeSelectedPersonCommand; }
         }
-
         public WPFCommand RemovePersonCommand
         {
             get { return _removePersonCommand; }
         }
+
+        public PeopleViewModel()
+        {
+            _removeSelectedPersonCommand = new WPFCommand(new Action(removeSelectedPersonAction));
+            _removePersonCommand = new WPFCommand(new Action<object>(removePersonAction), x => PeopleList.Count > 0);
+        }
+
 
         protected People _peopleList = new People();
 
@@ -39,7 +46,7 @@ namespace WpfTestApp
                 if (_selectedPerson != value)
                 {
                     _selectedPerson = value;
-                    NotifyPropertyChanged("SelectedPerson");
+                    Console.WriteLine("Selected Person {0}", SelectedPerson.Occupation);
                 }
             }
 
@@ -55,29 +62,29 @@ namespace WpfTestApp
             SelectedPerson = PeopleList.addPerson();
         }
 
-       public void removeSelectedPerson()
-        {
-            return;
-            //if (_selectedPerson != null)
-            //{
-                PeopleList.removePerson(SelectedPerson);
-                if (PeopleList.Count > 0)
-                    SelectedPerson = PeopleList[0];
-                else
-                    SelectedPerson = null;
-            //}
-        }
 
-        public void removeSelectedPersonAction(object dummy = null)
+        public void removeSelectedPersonAction()
         {
-            //if (_selectedPerson != null)
-            //{
             PeopleList.removePerson(SelectedPerson);
             if (PeopleList.Count > 0)
                 SelectedPerson = PeopleList[0];
             else
                 SelectedPerson = null;
-            //}
         }
+
+        public void removePersonAction(object toRemove)
+        {
+            Console.WriteLine("Removing '{1}' {0}", PeopleList.Count, toRemove);
+            PeopleList.removePerson((Person)toRemove); //unfortunately, casting is needed.
+           // PeopleList.removePerson(SelectedPerson); //unfortunately, casting is needed.
+            if (PeopleList.Count > 0)
+                SelectedPerson = PeopleList[0];
+            else
+                SelectedPerson = null;
+            Console.WriteLine("Removing {0}", PeopleList.Count);
+            RemovePersonCommand.RaiseCanExecuteChanged();
+
+        }
+
     }
 }

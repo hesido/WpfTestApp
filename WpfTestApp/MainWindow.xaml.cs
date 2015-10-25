@@ -36,11 +36,8 @@ namespace WpfTestApp
         private void AddPersonButton_Click(object sender, RoutedEventArgs e)
         {
             viewModel.addPerson();
+            viewModel.RemovePersonCommand.RaiseCanExecuteChanged();
         }
 
-        private void RemovePersonButton_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.removeSelectedPerson();
-        }
     }
 }
