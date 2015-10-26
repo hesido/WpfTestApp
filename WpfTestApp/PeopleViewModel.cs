@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace WpfTestApp
 {
@@ -11,15 +12,23 @@ namespace WpfTestApp
     {
 
         private WPFCommand _removePersonCommand;
+        private WPFCommand _addPersonCommand;
 
         public PeopleViewModel()
         {
-            _removePersonCommand = new WPFCommand(new Action<object> (removePersonAction), x => PeopleList.Count < 4);
+            _removePersonCommand = new WPFCommand(new Action<object> (removePersonAction), x => PeopleList.Count > 0);
+            _addPersonCommand = new WPFCommand(new Action(addPersonAction));
+            _peopleList.CollectionChanged += delegate(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) { _removePersonCommand.RaiseCanExecuteChanged(); };
         }
 
         public WPFCommand RemovePersonCommand
         {
             get { return _removePersonCommand; }
+        }
+
+        public WPFCommand AddPersonCommand
+        {
+            get { return _addPersonCommand; }
         }
 
         protected People _peopleList = new People();
@@ -47,12 +56,13 @@ namespace WpfTestApp
 
         //public Action addPersonAction = PeopleViewModel.addPerson();
 
-        public void addPerson()
+        public void addPersonAction()
         {
             //Person newPerson = new Person() { Name = "New Person", Occupation = "Job" };
             //PeopleList.Add(newPerson);
             //SelectedPerson = newPerson;
             SelectedPerson = PeopleList.addPerson();
+         //   RemovePersonCommand.RaiseCanExecuteChanged();
         }
 
         public void removeSelectedPersonAction()
@@ -78,6 +88,8 @@ namespace WpfTestApp
                 SelectedPerson = PeopleList[0];
             else
                 SelectedPerson = null;
+
+        //    RemovePersonCommand.RaiseCanExecuteChanged();
             //}
         }
     }

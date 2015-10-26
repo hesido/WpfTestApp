@@ -13,7 +13,7 @@
         <ListBox x:Name="listBox" Margin="37,42,283,104" ItemsSource="{Binding PeopleList}" TabIndex="4" DisplayMemberPath="Name" SelectedItem="{Binding SelectedPerson}"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="243,94,0,0" TextWrapping="Wrap" Text="{Binding SelectedPerson.Name}" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="36" Width="144">
         </TextBlock>
-        <Button x:Name="AddPersonButton" Content="Add Person" HorizontalAlignment="Left" Margin="37,279,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Click="AddPersonButton_Click"/>
+        <Button x:Name="AddPersonButton" Content="Add Person" HorizontalAlignment="Left" Margin="37,279,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding AddPersonCommand, Mode=OneWay}"/>
         <Button x:Name="RemovePersonButton" Content="Remove Person" HorizontalAlignment="Left" Margin="37,304,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding RemovePersonCommand, Mode=OneWay}" CommandParameter="{Binding SelectedPerson}"/>
     </Grid>
 </Window>

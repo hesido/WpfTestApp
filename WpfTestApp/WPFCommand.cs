@@ -10,7 +10,7 @@ namespace WpfTestApp
 {
     public class WPFCommand : ICommand
     {
-        //Source: http://www.wpftutorial.net/delegatecommand.html
+        //Source modified from: http://www.wpftutorial.net/delegatecommand.html
         private readonly Predicate<object> _canExecute;
         private readonly Action<object> _execute;
         private readonly Action _executeNoParam;
@@ -41,7 +41,8 @@ namespace WpfTestApp
             {
                 return true;
             }
-
+            int i = 3;
+            Console.WriteLine($" Can execute run {i}"); ;
             return _canExecute(parameter);
         }
 
@@ -53,6 +54,8 @@ namespace WpfTestApp
 
         public void RaiseCanExecuteChanged()
         {
+            Console.WriteLine($" Can execute changed {CanExecuteChanged}"); ;
+
             if (CanExecuteChanged != null)
             {
                 CanExecuteChanged(this, EventArgs.Empty);

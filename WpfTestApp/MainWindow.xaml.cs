@@ -33,10 +33,5 @@ namespace WpfTestApp
          //   viewModel.SelectedPerson = viewModel.PeopleList[0];
         }
 
-        private void AddPersonButton_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.addPerson();
-        }
-
     }
 }
