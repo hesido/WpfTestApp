@@ -10,40 +10,43 @@ namespace WpfTestApp
 {
     public class WPFCommand : ICommand
     {
-        //Source modified from: http://www.wpftutorial.net/delegatecommand.html
         private readonly Predicate<object> _canExecute;
         private readonly Action<object> _execute;
         private readonly Action _executeNoParam;
+        private bool _useCommandManager;
+        private event EventHandler _canExecuteChanged;
 
-        public event EventHandler CanExecuteChanged;
 
-        //public WPFCommand(Action execute)
-        //{
+        public event EventHandler CanExecuteChanged {
+            add {
+                if(_useCommandManager) CommandManager.RequerySuggested += value;
+                _canExecuteChanged = value;
+            }
+            remove {
+                if (_useCommandManager) CommandManager.RequerySuggested -= value;
+                _canExecuteChanged = null;
+            }
+        }
 
-        //}
 
-        public WPFCommand(Action execute, Predicate<object> canExecute = null)
+        public WPFCommand(Action execute, Predicate<object> canExecute = null, bool useCommandManager = true)
         {
             _executeNoParam = execute;
             _canExecute = canExecute;
+            _useCommandManager = useCommandManager;
         }
 
-        public WPFCommand(Action<object> execute, Predicate<object> canExecute = null)
+        public WPFCommand(Action<object> execute, Predicate<object> canExecute = null, bool useCommandManager = true)
         {
             _execute = execute;
             _canExecute = canExecute;
+            _useCommandManager = useCommandManager;
         }
 
 
         public bool CanExecute(object parameter)
         {
-            if (_canExecute == null)
-            {
-                return true;
-            }
-            int i = 3;
-            Console.WriteLine($" Can execute run {i}"); ;
-            return _canExecute(parameter);
+            return (_canExecute == null)? true : _canExecute(parameter);
         }
 
         public void Execute(object parameter)
@@ -54,12 +57,7 @@ namespace WpfTestApp
 
         public void RaiseCanExecuteChanged()
         {
-            Console.WriteLine($" Can execute changed {CanExecuteChanged}"); ;
-
-            if (CanExecuteChanged != null)
-            {
-                CanExecuteChanged(this, EventArgs.Empty);
-            }
+            _canExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

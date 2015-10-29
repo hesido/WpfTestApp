@@ -17,8 +17,8 @@ namespace WpfTestApp
         public PeopleViewModel()
         {
             _removePersonCommand = new WPFCommand(new Action<object> (removePersonAction), x => PeopleList.Count > 0);
-            _addPersonCommand = new WPFCommand(new Action(addPersonAction));
-            _peopleList.CollectionChanged += delegate(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) { _removePersonCommand.RaiseCanExecuteChanged(); };
+            _addPersonCommand = new WPFCommand(() => SelectedPerson = PeopleList.addPerson(), null, false);
+            //_peopleList.CollectionChanged += delegate(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) { _removePersonCommand.RaiseCanExecuteChanged(); };
         }
 
         public WPFCommand RemovePersonCommand
@@ -83,11 +83,10 @@ namespace WpfTestApp
             //{
 
             Console.WriteLine((toRemove as Person).Name);
-            PeopleList.removePerson(toRemove as Person);
-            if (PeopleList.Count > 0)
-                SelectedPerson = PeopleList[0];
-            else
-                SelectedPerson = null;
+            var forRemoval = (toRemove as Person);
+            int pos = Math.Max(PeopleList.IndexOf(forRemoval), 1);
+            PeopleList.removePerson(forRemoval);
+            SelectedPerson = (PeopleList.Count > pos - 1) ? PeopleList[pos - 1] : null;
 
         //    RemovePersonCommand.RaiseCanExecuteChanged();
             //}
