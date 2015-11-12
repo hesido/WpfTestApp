@@ -9,6 +9,7 @@ namespace WpfTestApp
 {
     class People : ObservableCollection<Person>
     {
+        private static int countIndex = 0;
 
         public People()
         {
@@ -16,7 +17,7 @@ namespace WpfTestApp
         }
 
         public Person addPerson() {
-            Person newPerson = new Person() { Name = "Abe" + new Random().Next().ToString() };
+            Person newPerson = new Person() { Name = "Abe" + new Random().Next().ToString(), Occupation = "Job " + (++countIndex) };
             this.Add(newPerson);
             return newPerson;
             }
