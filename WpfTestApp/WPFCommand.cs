@@ -10,6 +10,7 @@ namespace WpfTestApp
 {
     public class WPFCommand : ICommand
     {
+        //Hesido's Custom WPFCommand modified from multiple sources - Use at your own risk
         private readonly Predicate<object> _canExecute;
         private readonly Action<object> _execute;
         private readonly Action _executeNoParam;

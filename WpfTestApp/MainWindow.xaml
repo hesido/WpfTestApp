@@ -24,19 +24,50 @@
         </TextBlock>
         <Button x:Name="AddPersonButton" Content="Add Person" HorizontalAlignment="Left" Margin="37,279,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding AddPersonCommand, Mode=OneWay}"/>
         <Button x:Name="RemovePersonButton" Content="Remove Person" HorizontalAlignment="Left" Margin="37,304,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding RemovePersonCommand, Mode=OneWay}" CommandParameter="{Binding SelectedPerson}"/>
-        <ComboBox x:Name="comboBox" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Height="37" Margin="240,158,0,0" VerticalAlignment="Top" Width="163" ItemsSource="{Binding PeopleList}">
+        <ComboBox x:Name="comboBoxRaw" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Height="37" Margin="240,104,0,0" VerticalAlignment="Top" Width="163" ItemsSource="{Binding PeopleList}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
                         <TextBlock.Text>
-                        <MultiBinding StringFormat="Sabbiee: {0} {1}">
-                            <Binding Path="Name" />
-                            <Binding Path="Occupation" />
-                        </MultiBinding>
+                            <MultiBinding StringFormat="Sabbiee: {0} {1}">
+                                <Binding Path="Name" />
+                                <Binding Path="Occupation" />
+                            </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        <ComboBox x:Name="comboBoxTickBox" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Height="37" Margin="240,146,0,0" VerticalAlignment="Top" Width="163" ItemsSource="{Binding PeopleList}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Sabbiee: {0} {1}">
+                                <Binding Path="Name" />
+                                <Binding Path="Occupation" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Expander x:Name="expander" Header="People List" HorizontalAlignment="Left" Margin="269,220,0,0" VerticalAlignment="Top" IsExpanded="True" Width="176">
+         
+            <!--
+            <ListBox x:Name="listBox1" Height="100" SelectionMode="Multiple" ItemsSource="{Binding PeopleList}" Margin="0,0,-2,0" DisplayMemberPath="Name" ItemStringFormat="{}{0} yr"/>
+-->
+
+            <ListBox x:Name="listBox2" Height="100" SelectionMode="Multiple" ItemsSource="{Binding PeopleList}" Margin="0,0,-2,0">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Content="{Binding Name}"></CheckBox>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                
+            </ListBox>
+
+        </Expander>
     </Grid>
 </Window>
