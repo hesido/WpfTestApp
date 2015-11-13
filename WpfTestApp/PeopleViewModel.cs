@@ -36,7 +36,15 @@ namespace WpfTestApp
         public People PeopleList
         {
             get { return _peopleList; }
-            set { _peopleList = value; }
+           // set { _peopleList = value; }
+        }
+
+        private People _selectedPeople = new People();
+
+        public People SelectedPeople
+        {
+            get { return _selectedPeople; }
+            set { _selectedPeople = value; }
         }
 
         protected Person _selectedPerson = null;
