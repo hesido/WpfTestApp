@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTestApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="408.937" Width="464.945" Loaded="Window_Loaded">
+        Title="MainWindow" Height="408.937" Width="690.738" Loaded="Window_Loaded">
     <Window.DataContext>
         <local:PeopleViewModel x:Name="viewModel" />
     </Window.DataContext>
     <Grid Margin="0,0,2,0">
-        <ListBox x:Name="listBox" Margin="37,42,283,104" ItemsSource="{Binding PeopleList}" TabIndex="4" DisplayMemberPath="Name" SelectedItem="{Binding SelectedPerson}"/>
+        <ListBox x:Name="listBox" Margin="37,42,0,104" ItemsSource="{Binding PeopleList}" TabIndex="4" DisplayMemberPath="Name" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Width="135"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="240,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="48" Width="163">
             <TextBlock.Effect>
                 <DropShadowEffect/>
@@ -24,19 +24,44 @@
         </TextBlock>
         <Button x:Name="AddPersonButton" Content="Add Person" HorizontalAlignment="Left" Margin="37,279,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding AddPersonCommand, Mode=OneWay}"/>
         <Button x:Name="RemovePersonButton" Content="Remove Person" HorizontalAlignment="Left" Margin="37,304,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding RemovePersonCommand, Mode=OneWay}" CommandParameter="{Binding SelectedPerson}"/>
-        <ComboBox x:Name="comboBox" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Height="37" Margin="240,158,0,0" VerticalAlignment="Top" Width="163" ItemsSource="{Binding PeopleList}">
+        <ComboBox x:Name="comboBoxRaw" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Height="37" Margin="240,104,0,0" VerticalAlignment="Top" Width="163" ItemsSource="{Binding PeopleList}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
                         <TextBlock.Text>
-                        <MultiBinding StringFormat="Sabbiee: {0} {1}">
-                            <Binding Path="Name" />
-                            <Binding Path="Occupation" />
-                        </MultiBinding>
+                            <MultiBinding StringFormat="Sabbiee: {0} {1}">
+                                <Binding Path="Name" />
+                                <Binding Path="Occupation" />
+                            </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        <ComboBox x:Name="comboBoxTickBox" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Height="37" Margin="240,146,0,0" VerticalAlignment="Top" Width="163" ItemsSource="{Binding PeopleList}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Sabbiee: {0} {1}">
+                                <Binding Path="Name" />
+                                <Binding Path="Occupation" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Expander x:Name="expander" Header="People List" HorizontalAlignment="Left" Margin="269,220,0,0" VerticalAlignment="Top" IsExpanded="True" Width="176">
+
+            <!--
+            <ListBox x:Name="listBox1" Height="100" SelectionMode="Multiple" ItemsSource="{Binding PeopleList}" Margin="0,0,-2,0" DisplayMemberPath="Name" ItemStringFormat="{}{0} yr"/>
+-->
+
+            <ListBox x:Name="listBox2" Height="100" SelectionMode="Multiple" ItemsSource="{Binding PeopleList}" DisplayMemberPath="Name" local:ListBoxHelper.SelectedItems="{Binding SelectedPeople}" Margin="0,0,-2,0" TextSearch.TextPath="Name">
+            </ListBox>
+
+        </Expander>
+        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="100" Margin="503,71,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding SelectedPeople}" DisplayMemberPath="Name"/>
     </Grid>
 </Window>
