@@ -13,6 +13,7 @@ namespace WpfTestApp
         {
             this.Name = Name;
             this.Occupation = Occupation;
+            this.IsSelected = false;
         }
 
         public string Name
@@ -21,6 +22,11 @@ namespace WpfTestApp
         }
 
         public string Occupation
+        {
+            get; set;
+        }
+
+        public bool IsSelected
         {
             get; set;
         }

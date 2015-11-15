@@ -52,7 +52,10 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Expander x:Name="expander" Header="People List" HorizontalAlignment="Left" Margin="269,220,0,0" VerticalAlignment="Top" IsExpanded="True" Width="176">
+        <Expander x:Name="expander" HorizontalAlignment="Left" Margin="189,218,0,0" VerticalAlignment="Top" IsExpanded="True" Width="176">
+            <Expander.Header>
+                <TextBlock Text="{Binding SelectedPeople.Count, StringFormat='{}{0} People selected'}"/>
+            </Expander.Header>
 
             <!--
             <ListBox x:Name="listBox1" Height="100" SelectionMode="Multiple" ItemsSource="{Binding PeopleList}" Margin="0,0,-2,0" DisplayMemberPath="Name" ItemStringFormat="{}{0} yr"/>
@@ -62,6 +65,27 @@
             </ListBox>
 
         </Expander>
-        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="100" Margin="503,71,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding SelectedPeople}" DisplayMemberPath="Name"/>
+        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="100" Margin="427,10,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding SelectedPeople}" DisplayMemberPath="IsSelected"/>
+        <Expander x:Name="expander_Copy" HorizontalAlignment="Left" Margin="427,218,0,0" VerticalAlignment="Top" IsExpanded="True" Width="176">
+            <Expander.Header>
+                <TextBlock Text="{Binding SelectedPeople.Count, StringFormat=\{0\} People selected}"/>
+            </Expander.Header>
+
+            <!--
+            <ListBox x:Name="listBox1" Height="100" SelectionMode="Multiple" ItemsSource="{Binding PeopleList}" Margin="0,0,-2,0" DisplayMemberPath="Name" ItemStringFormat="{}{0} yr"/>
+-->
+
+            <ListBox x:Name="listBox3" Height="100" SelectionMode="Single" ItemsSource="{Binding PeopleList}" Margin="0,0,-2,0" TextSearch.TextPath="Name" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected}"></CheckBox>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </Expander>
+        <ListBox x:Name="listBox1_Copy" HorizontalAlignment="Left" Height="100" Margin="553,10,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding SelectedPeople}" DisplayMemberPath="IsSelected"/>
     </Grid>
 </Window>
