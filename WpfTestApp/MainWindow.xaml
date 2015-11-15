@@ -58,7 +58,7 @@
             <ListBox x:Name="listBox1" Height="100" SelectionMode="Multiple" ItemsSource="{Binding PeopleList}" Margin="0,0,-2,0" DisplayMemberPath="Name" ItemStringFormat="{}{0} yr"/>
 -->
 
-            <ListBox x:Name="listBox2" Height="100" SelectionMode="Multiple" ItemsSource="{Binding PeopleList}" local:ListBoxHelper.SelectedItems="{Binding SelectedPeople}" Margin="0,0,-2,0" TextSearch.TextPath="Name">
+            <ListBox x:Name="listBox2" Height="100" SelectionMode="Multiple" ItemsSource="{Binding PeopleList}" DisplayMemberPath="Name" local:ListBoxHelper.SelectedItems="{Binding SelectedPeople}" Margin="0,0,-2,0" TextSearch.TextPath="Name">
             </ListBox>
 
         </Expander>
