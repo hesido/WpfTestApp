@@ -17,7 +17,7 @@ namespace WpfTestApp
         }
 
         public Person addPerson() {
-            Person newPerson = new Person() { Name = "Abe" + new Random().Next().ToString(), Occupation = "Job " + (++countIndex) };
+            Person newPerson = new Person() { Name = String.Format("{0}abe {1}", (char)('A' + new Random().Next(0, 26)), new Random().Next(1000,5000).ToString() ), Occupation = "Job " + (++countIndex) };
             this.Add(newPerson);
             return newPerson;
             }

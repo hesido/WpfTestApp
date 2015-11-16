@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Windows.Data;
+using System.ComponentModel;
 
 namespace WpfTestApp
 {
@@ -70,7 +72,7 @@ namespace WpfTestApp
             //PeopleList.Add(newPerson);
             //SelectedPerson = newPerson;
             SelectedPerson = PeopleList.addPerson();
-         //   RemovePersonCommand.RaiseCanExecuteChanged();
+            //   RemovePersonCommand.RaiseCanExecuteChanged();
         }
 
         public void removeSelectedPersonAction()

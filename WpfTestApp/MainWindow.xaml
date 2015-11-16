@@ -65,7 +65,7 @@
             </ListBox>
 
         </Expander>
-        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="100" Margin="427,10,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding SelectedPeople}" DisplayMemberPath="IsSelected"/>
+        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="100" Margin="427,10,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding SelectedPeople}" DisplayMemberPath="Name"/>
         <Expander x:Name="expander_Copy" HorizontalAlignment="Left" Margin="427,218,0,0" VerticalAlignment="Top" IsExpanded="True" Width="176">
             <Expander.Header>
                 <TextBlock Text="{Binding SelectedPeople.Count, StringFormat=\{0\} People selected}"/>
@@ -86,6 +86,6 @@
             </ListBox>
 
         </Expander>
-        <ListBox x:Name="listBox1_Copy" HorizontalAlignment="Left" Height="100" Margin="553,10,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding SelectedPeople}" DisplayMemberPath="IsSelected"/>
+        <ListBox x:Name="listBox1_Copy" HorizontalAlignment="Left" Height="100" Margin="553,10,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding PeopleList}" DisplayMemberPath="IsSelected" />
     </Grid>
 </Window>
