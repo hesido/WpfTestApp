@@ -44,7 +44,6 @@ namespace WpfTestApp
             _useCommandManager = useCommandManager;
         }
 
-
         public bool CanExecute(object parameter)
         {
             return (_canExecute == null)? true : _canExecute(parameter);

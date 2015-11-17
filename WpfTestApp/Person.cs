@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace WpfTestApp
 {
-    class Person
+    class Person : SelectableItem
     {
 
-        public Person(string Name = "New Person", string Occupation = "Job Name")
+        public Person(string setName = "New Person", string setOccupation = "Job Name")
         {
-            this.Name = Name;
-            this.Occupation = Occupation;
+            Name = setName;
+            Occupation = setOccupation;
         }
 
         public string Name
@@ -24,5 +24,16 @@ namespace WpfTestApp
         {
             get; set;
         }
+
+        //public bool IsSelected
+        //{
+        //    get; set;
+        //}
+
+        //public override string ToString()
+        //{
+        //    return Name;
+        //}
     }
+
 }
