@@ -37,6 +37,7 @@ namespace WpfTestApp
         /// </summary>
         private static void OnSelectedItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            Console.WriteLine("delegation {0}", d);
             var listBox = (ListBox)d;
             ReSetSelectedItems(listBox);
             listBox.SelectionChanged += delegate
