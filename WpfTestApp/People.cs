@@ -16,6 +16,12 @@ namespace WpfTestApp
             //nothing to see here.
         }
 
+        public People(List<Person> personList) : base(personList)
+        {
+            //Accomodate base constructor to create an observable collection out of a list
+        }
+
+
         public Person addPerson() {
             Person newPerson = new Person() { Name = String.Format("{0}abe {1}", (char)('A' + new Random().Next(0, 26)), new Random().Next(1000,5000).ToString() ), Occupation = "Job " + (++countIndex) };
             this.Add(newPerson);

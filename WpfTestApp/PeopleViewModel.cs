@@ -15,11 +15,13 @@ namespace WpfTestApp
 
         private WPFCommand _removePersonCommand;
         private WPFCommand _addPersonCommand;
+        private WPFCommand _filterPeopleCommand;
 
         public PeopleViewModel()
         {
             _removePersonCommand = new WPFCommand(new Action<object> (removePersonAction), x => PeopleList.Count > 0);
-            _addPersonCommand = new WPFCommand(() => SelectedPerson = PeopleList.addPerson(), null, false);
+            _addPersonCommand = new WPFCommand(() => { SelectedPerson = PeopleList.addPerson(); Console.WriteLine(CheckSelectedPeople.Count); }, null, false);
+            _filterPeopleCommand = new WPFCommand(new Action(filterSelectedAction), null, false);
             //_peopleList.CollectionChanged += delegate(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) { _removePersonCommand.RaiseCanExecuteChanged(); };
         }
 
@@ -33,20 +35,17 @@ namespace WpfTestApp
             get { return _addPersonCommand; }
         }
 
+        public WPFCommand FilterPeopleCommand
+        {
+            get { return _filterPeopleCommand; }
+        }
+
         protected People _peopleList = new People();
 
         public People PeopleList
         {
             get { return _peopleList; }
            // set { _peopleList = value; }
-        }
-
-        private People _selectedPeople = new People();
-
-        public People SelectedPeople
-        {
-            get { return _selectedPeople; }
-            set { _selectedPeople = value; }
         }
 
         protected Person _selectedPerson = null;
@@ -65,15 +64,6 @@ namespace WpfTestApp
         }
 
         //public Action addPersonAction = PeopleViewModel.addPerson();
-
-        public void addPersonAction()
-        {
-            //Person newPerson = new Person() { Name = "New Person", Occupation = "Job" };
-            //PeopleList.Add(newPerson);
-            //SelectedPerson = newPerson;
-            SelectedPerson = PeopleList.addPerson();
-            //   RemovePersonCommand.RaiseCanExecuteChanged();
-        }
 
         public void removeSelectedPersonAction()
         {
@@ -100,6 +90,29 @@ namespace WpfTestApp
 
         //    RemovePersonCommand.RaiseCanExecuteChanged();
             //}
+        }
+
+        private People _selectedPeople = new People();
+
+        public People SelectedPeople
+        {
+            get { return _selectedPeople; }
+            set { _selectedPeople = value; }
+        }
+
+        private People _checkSelectedPeople = new People();
+
+        public People CheckSelectedPeople
+        {
+            get { return _checkSelectedPeople; }
+            set { _checkSelectedPeople = value; }
+        }
+
+
+        public void filterSelectedAction()
+        {
+            _checkSelectedPeople = new People(PeopleList.Where((p) => p.IsSelected).ToList());
+            NotifyPropertyChanged("CheckSelectedPeople");
         }
     }
 }
