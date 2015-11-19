@@ -30,8 +30,8 @@ namespace WpfTestApp
         {
             var _checkBox = (CheckBox)d;
             Console.WriteLine("{0} |||| {1}", _checkBox.DataContext, _checkBox.DataContext.GetType());
-            _checkBox.Checked += checkControl;
-            _checkBox.Unchecked += unCheckControl;
+           // _checkBox.Checked += checkControl;
+          //  _checkBox.Unchecked += unCheckControl;
         }
 
         private static void checkControl(object sender, RoutedEventArgs e)

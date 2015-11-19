@@ -34,5 +34,9 @@ namespace WpfTestApp
          //   viewModel.SelectedPerson = viewModel.PeopleList[0];
         }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var _checkBox = (CheckBox)e.Source;
+        }
     }
 }

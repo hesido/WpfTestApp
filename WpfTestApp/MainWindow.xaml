@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTestApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="408.937" Width="690.738" Loaded="Window_Loaded">
+        Title="MainWindow" Height="577.937" Width="690.738" Loaded="Window_Loaded">
     <Window.DataContext>
         <local:PeopleViewModel x:Name="viewModel" />
     </Window.DataContext>
     <Grid Margin="0,0,2,0">
-        <ListBox x:Name="listBox" Margin="37,42,0,104" ItemsSource="{Binding PeopleList}" TabIndex="4" DisplayMemberPath="Name" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Width="135"/>
+        <ListBox x:Name="listBox" Margin="37,42,0,0" ItemsSource="{Binding PeopleList}" TabIndex="4" DisplayMemberPath="Name" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Width="135" Height="232" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="240,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="48" Width="163">
             <TextBlock.Effect>
                 <DropShadowEffect/>
@@ -52,7 +52,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Expander x:Name="expander" HorizontalAlignment="Left" Margin="189,218,0,0" VerticalAlignment="Top" IsExpanded="True" Width="176">
+        <Expander x:Name="expander" HorizontalAlignment="Left" Margin="193,277,0,0" VerticalAlignment="Top" IsExpanded="True" Width="176">
             <Expander.Header>
                 <TextBlock Text="{Binding SelectedPeople.Count, StringFormat='{}{0} People selected'}"/>
             </Expander.Header>
@@ -66,7 +66,7 @@
 
         </Expander>
         <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="100" Margin="427,10,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding SelectedPeople}" DisplayMemberPath="Name"/>
-        <Expander x:Name="expander_Copy" HorizontalAlignment="Left" Margin="427,218,0,0" VerticalAlignment="Top" IsExpanded="True" Width="176">
+        <Expander x:Name="expander_Copy" HorizontalAlignment="Left" Margin="427,277,0,0" VerticalAlignment="Top" IsExpanded="True" Width="176">
             <Expander.Header>
                 <TextBlock Text="{Binding SelectedPeople.Count, StringFormat=\{0\} People selected}"/>
             </Expander.Header>
@@ -75,18 +75,22 @@
             <ListBox x:Name="listBox1" Height="100" SelectionMode="Multiple" ItemsSource="{Binding PeopleList}" Margin="0,0,-2,0" DisplayMemberPath="Name" ItemStringFormat="{}{0} yr"/>
 -->
 
-            <ListBox x:Name="listBox3" Height="100" SelectionMode="Multiple" ItemsSource="{Binding PeopleList}" Margin="0,0,-2,0" TextSearch.TextPath="Name" >
+            <ListBox x:Name="listBox3" Height="100" SelectionMode="Multiple" local:ListBoxHelper.SelectedItems="{Binding SelectedPeople}" ItemsSource="{Binding PeopleList}" Margin="0,0,-2,0" TextSearch.TextPath="Name" >
+                <ListBox.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                   </Style>
+                </ListBox.Resources>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <CheckBox local:CheckBoxHelper.CheckedItem=""  Content="{Binding Name}" IsChecked="{Binding IsSelected}"></CheckBox>
-                        </StackPanel>
+                        <CheckBox local:CheckBoxHelper.CheckedItem=""  Content="{Binding Name}" IsChecked="{Binding IsSelected}" Checked="CheckBox_Checked"></CheckBox>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
 
         </Expander>
         <ListBox x:Name="listBox1_Copy" HorizontalAlignment="Left" Height="100" Margin="553,10,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding CheckSelectedPeople}" DisplayMemberPath="Name" />
-        <Button x:Name="FilterSelected" Content="Filter Selected" HorizontalAlignment="Left" Margin="448,193,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding FilterPeopleCommand, Mode=OneWay}"/>
+        <Button x:Name="FilterSelected" Content="Filter Selected" HorizontalAlignment="Left" Margin="455,405,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding FilterPeopleCommand, Mode=OneWay}"/>
+        <ListBox x:Name="listBox1_Copy1" HorizontalAlignment="Left" Height="100" Margin="427,136,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding CheckSelectedPeople}" DisplayMemberPath="Name" />
     </Grid>
 </Window>
