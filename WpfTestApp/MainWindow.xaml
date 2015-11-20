@@ -16,9 +16,10 @@
                 <DropShadowEffect/>
             </TextBlock.Effect>
             <TextBlock.Text>
-                <MultiBinding StringFormat="Name: {0} - Job {1}">
+                <MultiBinding StringFormat="Name: {0} - Job {1}: Selected {2}">
                     <Binding Path="SelectedPerson.Name"></Binding>
                     <Binding Path="SelectedPerson.Occupation"></Binding>
+                    <Binding Path="SelectedPerson.IsSelected"></Binding>
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>

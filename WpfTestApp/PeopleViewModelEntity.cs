@@ -15,7 +15,6 @@ namespace WpfTestApp
         {
             if(PropertyChanged != null)
             {
-                Console.WriteLine($"Changed: {propName}");
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }

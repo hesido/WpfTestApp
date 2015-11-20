@@ -111,6 +111,7 @@ namespace WpfTestApp
 
         public void filterSelectedAction()
         {
+           //if(SelectedPerson != null) SelectedPerson.IsSelected = true; //testing notification
             _checkSelectedPeople = new People(PeopleList.Where((p) => p.IsSelected).ToList());
             NotifyPropertyChanged("CheckSelectedPeople");
         }

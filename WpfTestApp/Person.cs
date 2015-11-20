@@ -25,11 +25,6 @@ namespace WpfTestApp
             get; set;
         }
 
-        //public bool IsSelected
-        //{
-        //    get; set;
-        //}
-
         //public override string ToString()
         //{
         //    return Name;
