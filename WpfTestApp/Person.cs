@@ -13,6 +13,14 @@ namespace WpfTestApp
         {
             Name = setName;
             Occupation = setOccupation;
+            Hobbard = new Hobby();
+            Hobbard.Expense = "sompre";
+            Hobbard.HobbyType = "shulteck";
+        }
+
+        public Hobby Hobbard
+        {
+            get; set;
         }
 
         public string Name
@@ -23,6 +31,21 @@ namespace WpfTestApp
         public string Occupation
         {
             get; set;
+        }
+
+        public class Hobby
+        {
+
+            public string HobbyType
+            {
+                get; set;
+            }
+
+            public string Expense
+            {
+                get; set;
+            }
+
         }
 
         //public override string ToString()

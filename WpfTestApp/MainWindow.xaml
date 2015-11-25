@@ -19,7 +19,7 @@
                 <MultiBinding StringFormat="Name: {0} - Job {1}: Selected {2}">
                     <Binding Path="SelectedPerson.Name"></Binding>
                     <Binding Path="SelectedPerson.Occupation"></Binding>
-                    <Binding Path="SelectedPerson.IsSelected"></Binding>
+                    <Binding Path="SelectedPerson.Hobbard"></Binding>
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
@@ -44,9 +44,10 @@
                 <DataTemplate>
                     <TextBlock>
                         <TextBlock.Text>
-                            <MultiBinding StringFormat="Sabbiee: {0} {1}">
+                            <MultiBinding StringFormat="S: {0} {1} {2}">
                                 <Binding Path="Name" />
                                 <Binding Path="Occupation" />
+                                <Binding Path="Hobbard.Expense" />
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
@@ -80,7 +81,7 @@
                 <ListBox.Resources>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                   </Style>
+                    </Style>
                 </ListBox.Resources>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -93,5 +94,7 @@
         <ListBox x:Name="listBox1_Copy" HorizontalAlignment="Left" Height="100" Margin="553,10,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding CheckSelectedPeople}" DisplayMemberPath="Name" />
         <Button x:Name="FilterSelected" Content="Filter Selected" HorizontalAlignment="Left" Margin="455,405,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding FilterPeopleCommand, Mode=OneWay}"/>
         <ListBox x:Name="listBox1_Copy1" HorizontalAlignment="Left" Height="100" Margin="427,136,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding CheckSelectedPeople}" DisplayMemberPath="Name" />
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="271,234,0,0" TextWrapping="Wrap" Text="{Binding SelectedPerson.Hobbard.Expense}" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="553,186,0,0" VerticalAlignment="Top" Height="64" Width="74"/>
     </Grid>
 </Window>
