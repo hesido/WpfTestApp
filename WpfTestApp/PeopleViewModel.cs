@@ -17,11 +17,15 @@ namespace WpfTestApp
         private WPFCommand _addPersonCommand;
         private WPFCommand _filterPeopleCommand;
 
+        public ListCollectionView filteredPeopleView { get; set; }
+
         public PeopleViewModel()
         {
             _removePersonCommand = new WPFCommand(new Action<object> (removePersonAction), x => PeopleList.Count > 0);
             _addPersonCommand = new WPFCommand(() => { SelectedPerson = PeopleList.addPerson(); Console.WriteLine(CheckSelectedPeople.Count); }, null, false);
             _filterPeopleCommand = new WPFCommand(new Action(filterSelectedAction), null, false);
+            filteredPeopleView = new ListCollectionView(PeopleList);
+            filteredPeopleView.Filter = (p) => !((Person)p).IsSelected;
             //_peopleList.CollectionChanged += delegate(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) { _removePersonCommand.RaiseCanExecuteChanged(); };
         }
 
@@ -114,6 +118,7 @@ namespace WpfTestApp
            //if(SelectedPerson != null) SelectedPerson.IsSelected = true; //testing notification
             _checkSelectedPeople = new People(PeopleList.Where((p) => p.IsSelected).ToList());
             NotifyPropertyChanged("CheckSelectedPeople");
+            filteredPeopleView.Refresh();//force refresh for view
         }
     }
 }
