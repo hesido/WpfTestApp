@@ -35,7 +35,6 @@ namespace WpfTestApp
 
         public class Hobby
         {
-
             public string HobbyType
             {
                 get; set;

@@ -16,11 +16,30 @@ namespace WpfTestApp
         public WPFCommand RemovePersonCommand { get; set; }
         public WPFCommand AddPersonCommand { get; set; }
         public WPFCommand FilterPeopleCommand { get; set; }
+        public WPFCommand TextFilterPeopleCommand { get; set; }
         public People CheckSelectedPeople { get; set; }
 
         public People PeopleList { get; set; }
         public People SelectedPeople { get; set; }
         public ListCollectionView filteredPeopleView { get; set; }
+        public ListCollectionView TextFilteredPeopleView { get; set; }
+
+        protected string _filterText = "";
+
+        public string FilterText
+        {
+            get { return _filterText; }
+            set
+            {
+                if (_filterText != value)
+                {
+                    _filterText = value;
+                    Console.WriteLine("testeeee");
+                    NotifyPropertyChanged("FilterText");
+                    TextFilteredPeopleView.Refresh();
+                }
+            }
+        }
 
         protected Person _selectedPerson = null;
         public Person SelectedPerson
@@ -44,11 +63,19 @@ namespace WpfTestApp
             RemovePersonCommand = new WPFCommand(new Action<object> (removePersonAction), x => PeopleList.Count > 0);
             AddPersonCommand = new WPFCommand(() => { SelectedPerson = PeopleList.addPerson(); Console.WriteLine(CheckSelectedPeople.Count); }, null, false);
             FilterPeopleCommand = new WPFCommand(new Action(filterSelectedAction), null, false);
+            TextFilterPeopleCommand = new WPFCommand(new Action(() => TextFilteredPeopleView.Refresh()), null, false);
+
             filteredPeopleView = new ListCollectionView(PeopleList);
             filteredPeopleView.Filter = (p) => !((Person)p).IsSelected;
 
             filteredPeopleView.LiveFilteringProperties.Add("IsSelected");
             filteredPeopleView.IsLiveFiltering = true;
+
+            TextFilteredPeopleView = new ListCollectionView(PeopleList);
+            TextFilteredPeopleView.Filter = (p) => ((Person)p).Name.ToUpper().Contains(FilterText.ToUpper());
+
+            //TextFilteredPeopleView.LiveFilteringProperties.Add("Name");
+            //TextFilteredPeopleView.IsLiveFiltering = true;
 
             //_peopleList.CollectionChanged += delegate(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) { _removePersonCommand.RaiseCanExecuteChanged(); };
         }
