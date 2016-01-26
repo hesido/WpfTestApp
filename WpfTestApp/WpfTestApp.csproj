@@ -77,11 +77,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AsyncCommand.cs" />
+    <Compile Include="Asyncop.cs" />
     <Compile Include="CheckBoxHelper.cs" />
     <Compile Include="ListBoxHelper.cs" />
+    <Compile Include="NotifyTaskCompletion.cs" />
     <Compile Include="SelectableItem.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="WPFCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

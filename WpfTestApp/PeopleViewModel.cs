@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Data;
 using System.ComponentModel;
+using System.Threading;
 
 namespace WpfTestApp
 {
@@ -15,7 +16,7 @@ namespace WpfTestApp
 
         public WPFCommand RemovePersonCommand { get; set; }
         public WPFCommand AddPersonCommand { get; set; }
-        public WPFCommand FilterPeopleCommand { get; set; }
+        public IAsyncCommand FilterPeopleCommand { get; set; }
         public WPFCommand TextFilterPeopleCommand { get; set; }
         public People CheckSelectedPeople { get; set; }
 
@@ -26,6 +27,8 @@ namespace WpfTestApp
 
         protected string _filterText = "";
 
+        private int _kontör = 0;
+
         public string FilterText
         {
             get { return _filterText; }
@@ -34,9 +37,23 @@ namespace WpfTestApp
                 if (_filterText != value)
                 {
                     _filterText = value;
-                    Console.WriteLine("testeeee");
                     NotifyPropertyChanged("FilterText");
                     TextFilteredPeopleView.Refresh();
+                }
+            }
+        }
+
+        protected string _testString = "Hey!";
+
+        public string TestString
+        {
+            get { return _testString; }
+            set
+            {
+                if (_testString != value)
+                {
+                    _testString = value;
+                    NotifyPropertyChanged("TestString");
                 }
             }
         }
@@ -62,7 +79,8 @@ namespace WpfTestApp
             CheckSelectedPeople = new People();
             RemovePersonCommand = new WPFCommand(new Action<object> (removePersonAction), x => PeopleList.Count > 0);
             AddPersonCommand = new WPFCommand(() => { SelectedPerson = PeopleList.addPerson(); Console.WriteLine(CheckSelectedPeople.Count); }, null, false);
-            FilterPeopleCommand = new WPFCommand(new Action(filterSelectedAction), null, false);
+            //FilterPeopleCommand = new WPFCommand(new Action(filterSelectedAction), null, false);
+            FilterPeopleCommand = AsyncCommand.Create((token) => filterSelectedAction(token));
             TextFilterPeopleCommand = new WPFCommand(new Action(() => TextFilteredPeopleView.Refresh()), null, false);
 
             filteredPeopleView = new ListCollectionView(PeopleList);
@@ -76,7 +94,6 @@ namespace WpfTestApp
 
             //TextFilteredPeopleView.LiveFilteringProperties.Add("Name");
             //TextFilteredPeopleView.IsLiveFiltering = true;
-
             //_peopleList.CollectionChanged += delegate(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) { _removePersonCommand.RaiseCanExecuteChanged(); };
         }
 
@@ -104,12 +121,19 @@ namespace WpfTestApp
             //}
         }
 
-        public void filterSelectedAction()
+        public async Task<string> filterSelectedAction(CancellationToken token = new CancellationToken())
         {
-            CheckSelectedPeople = new People(PeopleList.Where((p) => p.IsSelected).ToList());
-            NotifyPropertyChanged("CheckSelectedPeople");
-            //filteredPeopleView.Refresh();//force refresh for view for when livefiltering is not on
-            Console.WriteLine(PeopleList.Count);
+
+            Asyncop.returnString(TestString).ConfigureAwait(false);
+            await Task.Delay(1100, token).ConfigureAwait(false);
+
+
+            return "uhuhuhuh";
+            //Console.WriteLine(TestString);
+            //CheckSelectedPeople = new People(PeopleList.Where((p) => p.IsSelected).ToList());
+            //NotifyPropertyChanged("CheckSelectedPeople");
+            ////filteredPeopleView.Refresh();//force refresh for view for when livefiltering is not on
+            //Console.WriteLine(PeopleList.Count);
         }
     }
 }
