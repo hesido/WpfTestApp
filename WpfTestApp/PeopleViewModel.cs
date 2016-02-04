@@ -121,19 +121,39 @@ namespace WpfTestApp
             //}
         }
 
+        public Action<object> myAction;
+
         public async Task<string> filterSelectedAction(CancellationToken token = new CancellationToken())
         {
+            myAction = new Action<object>((sport) => Console.WriteLine(sport));
 
             Asyncop.returnString(TestString).ConfigureAwait(false);
             await Task.Delay(1100, token).ConfigureAwait(false);
 
+            meinBruder(myAction);
+            
 
-            return "uhuhuhuh";
+            await Task.Delay(1100, token).ConfigureAwait(false);
+            return "ahahah";
             //Console.WriteLine(TestString);
             //CheckSelectedPeople = new People(PeopleList.Where((p) => p.IsSelected).ToList());
             //NotifyPropertyChanged("CheckSelectedPeople");
             ////filteredPeopleView.Refresh();//force refresh for view for when livefiltering is not on
             //Console.WriteLine(PeopleList.Count);
         }
+
+        public async void meinBruder(Action<object> PassAction)
+        {
+            int salmon = await returnInt();
+            PassAction.Invoke(salmon);
+        }
+
+        public async Task<int> returnInt()
+        {
+            Random rnd = new Random();
+            await Task.Delay(1300);
+            return rnd.Next(1, 20);
+        }
     }
+
 }
