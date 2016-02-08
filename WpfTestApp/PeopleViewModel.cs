@@ -26,7 +26,14 @@ namespace WpfTestApp
         public delegate Tunc<T> Tunc<T>(T obj);
 
 
-        public delegate bool MultiPredicate<Person>(Person P);
+        public delegate bool EvaluatePerson<Person>(Person P);
+
+
+        public Dictionary<string, Func<int, Predicate<Person>>> evalRules = new Dictionary<string, Func<int, Predicate<Person>>>()
+        {
+            ["AgeGreaterThan"] = new Func<int, Predicate<Person>>((int Limit)=> (Person P) => P.Age > Limit),
+            ["AgeLessThan"] = new Func<int, Predicate<Person>>((int Limit) => (Person P) => P.Age < Limit),
+        };
 
         static Predicate<Person> doom(int limit)
         {
@@ -113,13 +120,17 @@ namespace WpfTestApp
                     //Console.WriteLine(meine(SelectedPerson) && deine(SelectedPerson));
 
                     //MyFunc(3)(4)(2);
-                    var preComb = new MultiPredicate<Person>(doom(20));
-                    var treComb = new MultiPredicate<Person>(goom(5));
+                    //var preComb = new EvaluatePerson<Person>(doom(20));
+                    //var treComb = new EvaluatePerson<Person>(goom(5));
 
 
-                    Console.WriteLine(preComb(SelectedPerson) && treComb(SelectedPerson));
-                    Console.WriteLine(preComb);
-                    Console.WriteLine(treComb);
+                    //Console.WriteLine(preComb(SelectedPerson) && treComb(SelectedPerson));
+
+                    var moCap = evalRules["AgeGreaterThan"](15);
+                    var toCap = evalRules["AgeLessThan"](20);
+
+                    Console.WriteLine($"{moCap(SelectedPerson)} aw {toCap(SelectedPerson)}");
+
                 }
             }
 
