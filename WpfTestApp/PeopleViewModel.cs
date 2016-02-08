@@ -33,7 +33,19 @@ namespace WpfTestApp
         {
             ["AgeGreaterThan"] = new Func<int, Predicate<Person>>((int Limit)=> (Person P) => P.Age > Limit),
             ["AgeLessThan"] = new Func<int, Predicate<Person>>((int Limit) => (Person P) => P.Age < Limit),
+            ["ComfortGreaterThan"] = new Func<int, Predicate<Person>>((int Limit) => (Person P) => P.Comfort < Limit),
+            ["ComfortLessThan"] = new Func<int, Predicate<Person>>((int Limit) => (Person P) => P.Comfort < Limit),
         };
+
+
+        public Dictionary<int, Tuple<string, int>[]> RuleSet = new Dictionary<int, Tuple<string, int>[]>()
+        {
+            [1] = new Tuple<string, int>[] { new Tuple<string, int>("AgeGreaterThan", 20) },
+            [2] = new Tuple<string, int>[] { new Tuple<string, int>("ComfortLessThan", 5) }
+        };
+
+        //public Dictionary<int, >
+
 
         static Predicate<Person> doom(int limit)
         {
@@ -126,8 +138,8 @@ namespace WpfTestApp
 
                     //Console.WriteLine(preComb(SelectedPerson) && treComb(SelectedPerson));
 
-                    var moCap = evalRules["AgeGreaterThan"](15);
-                    var toCap = evalRules["AgeLessThan"](20);
+                    Predicate<Person> moCap = evalRules["AgeGreaterThan"](15);
+                    Predicate<Person> toCap = evalRules["AgeLessThan"](20);
 
                     Console.WriteLine($"{moCap(SelectedPerson)} aw {toCap(SelectedPerson)}");
 
