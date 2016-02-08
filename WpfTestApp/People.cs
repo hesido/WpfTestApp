@@ -23,13 +23,14 @@ namespace WpfTestApp
 
 
         public Person addPerson() {
-            Person newPerson = new Person() { Name = String.Format("{0}abe {1}", (char)('A' + new Random().Next(0, 26)), new Random().Next(1000,5000).ToString() ), Occupation = "Job " + (++countIndex) };
+            Person newPerson = new Person() { Name = String.Format("{0}abe {1}", (char)('A' + new Random().Next(0, 26)), new Random().Next(1000,5000).ToString() ), Occupation = "Job " + (++countIndex), Age = new Random().Next(2, 70), Comfort = new Random().Next(1, 10), Type = new Random().Next(1, 3) };
             this.Add(newPerson);
             return newPerson;
             }
         public void removePerson(Person toRemove) {
             if(this.Contains(toRemove)) this.Remove(toRemove);
         }
+
 
     }
 }

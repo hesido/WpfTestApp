@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTestApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="408.937" Width="690.738" Loaded="Window_Loaded">
+        Title="MainWindow" Height="408.937" Width="1113.498" Loaded="Window_Loaded">
     <Window.DataContext>
         <local:PeopleViewModel x:Name="viewModel" />
     </Window.DataContext>
     <Grid Margin="0,0,2,0">
         <ListBox x:Name="listBox" Margin="37,42,0,104" ItemsSource="{Binding PeopleList}" TabIndex="4" DisplayMemberPath="Name" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Width="135"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="240,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="48" Width="163">
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="189,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="48" Width="163">
             <TextBlock.Effect>
                 <DropShadowEffect/>
             </TextBlock.Effect>
@@ -24,7 +24,7 @@
         </TextBlock>
         <Button x:Name="AddPersonButton" Content="Add Person" HorizontalAlignment="Left" Margin="37,279,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding AddPersonCommand, Mode=OneWay}"/>
         <Button x:Name="RemovePersonButton" Content="Remove Person" HorizontalAlignment="Left" Margin="37,304,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding RemovePersonCommand, Mode=OneWay}" CommandParameter="{Binding SelectedPerson}"/>
-        <ComboBox x:Name="comboBoxRaw" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Height="37" Margin="240,104,0,0" VerticalAlignment="Top" Width="163" ItemsSource="{Binding PeopleList}">
+        <ComboBox x:Name="comboBoxRaw" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Height="37" Margin="189,109,0,0" VerticalAlignment="Top" Width="163" ItemsSource="{Binding PeopleList}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
@@ -38,7 +38,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox x:Name="comboBoxTickBox" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Height="37" Margin="240,146,0,0" VerticalAlignment="Top" Width="163" ItemsSource="{Binding PeopleList}">
+        <ComboBox x:Name="comboBoxTickBox" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Height="37" Margin="189,163,0,0" VerticalAlignment="Top" Width="163" ItemsSource="{Binding PeopleList}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
@@ -65,8 +65,8 @@
             </ListBox>
 
         </Expander>
-        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="100" Margin="427,10,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding SelectedPeople}" DisplayMemberPath="Name"/>
-        <Expander x:Name="expander_Copy" HorizontalAlignment="Left" Margin="427,218,0,0" VerticalAlignment="Top" IsExpanded="True" Width="176">
+        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="100" Margin="367,46,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding SelectedPeople}" DisplayMemberPath="Name"/>
+        <Expander x:Name="expander_Copy" HorizontalAlignment="Left" Margin="386,218,0,0" VerticalAlignment="Top" IsExpanded="True" Width="176">
             <Expander.Header>
                 <TextBlock Text="{Binding SelectedPeople.Count, StringFormat=\{0\} People selected}"/>
             </Expander.Header>
@@ -86,7 +86,8 @@
             </ListBox>
 
         </Expander>
-        <ListBox x:Name="listBox1_Copy" HorizontalAlignment="Left" Height="100" Margin="553,10,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding CheckSelectedPeople}" DisplayMemberPath="Name" />
-        <Button x:Name="FilterSelected" Content="Filter Selected" HorizontalAlignment="Left" Margin="427,193,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding FilterPeopleCommand, Mode=OneWay}"/>
+        <ListBox x:Name="listBox1_Copy" HorizontalAlignment="Left" Height="100" Margin="486,46,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding CheckSelectedPeople}" DisplayMemberPath="Name" />
+        <Button x:Name="FilterSelected" Content="Filter Selected" HorizontalAlignment="Left" Margin="386,193,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding FilterPeopleCommand, Mode=OneWay}"/>
+        <DataGrid x:Name="listBox_Copy" Margin="591,42,0,37" ItemsSource="{Binding PeopleList}" TabIndex="4" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Width="462"/>
     </Grid>
 </Window>

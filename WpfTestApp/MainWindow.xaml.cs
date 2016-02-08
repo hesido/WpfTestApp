@@ -25,7 +25,7 @@ namespace WpfTestApp
         {
             InitializeComponent();
 
-            //viewModel.People.Add(new Person() { Name = "Sombre perof", Occupation = "Prelnatrik" });
+            viewModel.PeopleList.Add(new Person() { Name = "Sombre perof", Occupation = "Prelnatrik", Age = 5, Comfort = 9 });
             //viewModel.People.Add(new Person() { Name = "4eombrwewe pweweerof", Occupation = "wawer" });
         }
 

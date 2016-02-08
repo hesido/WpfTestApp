@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Data;
 using System.ComponentModel;
+using WpfTestApp;
 
 namespace WpfTestApp
 {
@@ -17,12 +18,55 @@ namespace WpfTestApp
         private WPFCommand _addPersonCommand;
         private WPFCommand _filterPeopleCommand;
 
+
+        public delegate bool testDel(Person P);
+        //public delegate Func<T> multiDel(Person P, int lim);
+
+
+        public delegate Tunc<T> Tunc<T>(T obj);
+
+
+        public delegate bool MultiPredicate<Person>(Person P);
+
+        static Predicate<Person> doom(int limit)
+        {
+            return ((Person P) => P.Age > limit);
+        }
+
+        static Predicate<Person> goom(int limit)
+        {
+            return ((Person P) => P.Comfort > limit);
+        }
+
+        Tunc<T> MyFunc<T>(T obj)
+        {
+            Console.WriteLine(obj);
+            return MyFunc;
+        }
+
+        static bool test(Person p)
+        {
+            Console.Write("atest ");
+            return p.Comfort > 3;
+        }
+
+        static bool best(Person p)
+        {
+            Console.Write("besta ");
+            return p.Age < 45;
+        }
+
         public PeopleViewModel()
         {
+            
             _removePersonCommand = new WPFCommand(new Action<object> (removePersonAction), x => PeopleList.Count > 0);
-            _addPersonCommand = new WPFCommand(() => { SelectedPerson = PeopleList.addPerson(); Console.WriteLine(CheckSelectedPeople.Count); }, null, false);
+            _addPersonCommand = new WPFCommand(() => {
+                SelectedPerson = PeopleList.addPerson();
+            }, null, false);
             _filterPeopleCommand = new WPFCommand(new Action(filterSelectedAction), null, false);
             //_peopleList.CollectionChanged += delegate(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) { _removePersonCommand.RaiseCanExecuteChanged(); };
+
+
         }
 
         public WPFCommand RemovePersonCommand
@@ -58,6 +102,24 @@ namespace WpfTestApp
                 {
                     _selectedPerson = value;
                     NotifyPropertyChanged("SelectedPerson");
+                    //var pd = PredicateBuilder.True<Person>();
+
+                    //pd = pd.And((Person p) => p.Comfort > 4);
+                    //pd = pd.And((Person p) => p.Age < 20);
+                    //var meine = new testDel(test);
+                    //var deine = new testDel(best);
+
+
+                    //Console.WriteLine(meine(SelectedPerson) && deine(SelectedPerson));
+
+                    //MyFunc(3)(4)(2);
+                    var preComb = new MultiPredicate<Person>(doom(20));
+                    var treComb = new MultiPredicate<Person>(goom(5));
+
+
+                    Console.WriteLine(preComb(SelectedPerson) && treComb(SelectedPerson));
+                    Console.WriteLine(preComb);
+                    Console.WriteLine(treComb);
                 }
             }
 

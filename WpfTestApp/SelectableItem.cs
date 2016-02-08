@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WpfTestApp
 {
-    class SelectableItem
+    interface SelectableItem
     {
-        public bool IsSelected { get; set; }
+        bool IsSelected { get; set; }
 
-        public SelectableItem() { IsSelected = false; }
+        //public SelectableItem() { IsSelected = false; }
     }
 }
