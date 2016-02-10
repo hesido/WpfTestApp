@@ -39,7 +39,7 @@ namespace WpfTestApp
 
 
 
-    class Person : SelectableItem
+    public class Person : SelectableItem
     {
 
         public Person(string setName = "New Person", string setOccupation = "Job Name")

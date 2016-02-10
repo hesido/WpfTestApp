@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WpfTestApp
 {
-    class People : ObservableCollection<Person>
+    public class People : ObservableCollection<Person>
     {
         private static int countIndex = 0;
 

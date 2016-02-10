@@ -79,7 +79,9 @@
     </ApplicationDefinition>
     <Compile Include="ListBoxHelper.cs" />
     <Compile Include="PredicateBuilder.cs" />
+    <Compile Include="PredicateEvaluator.cs" />
     <Compile Include="SelectableItem.cs" />
+    <Compile Include="TestRule.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="WPFCommand.cs" />

@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Data;
 using System.ComponentModel;
 using WpfTestApp;
+using System.Linq.Expressions;
 
 namespace WpfTestApp
 {
@@ -31,19 +32,29 @@ namespace WpfTestApp
 
         public Dictionary<string, Func<int, Predicate<Person>>> evalRules = new Dictionary<string, Func<int, Predicate<Person>>>()
         {
-            ["AgeGreaterThan"] = new Func<int, Predicate<Person>>((int Limit)=> (Person P) => P.Age > Limit),
-            ["AgeLessThan"] = new Func<int, Predicate<Person>>((int Limit) => (Person P) => P.Age < Limit),
-            ["ComfortGreaterThan"] = new Func<int, Predicate<Person>>((int Limit) => (Person P) => P.Comfort < Limit),
-            ["ComfortLessThan"] = new Func<int, Predicate<Person>>((int Limit) => (Person P) => P.Comfort < Limit),
+            ["AgeGTO"] = new Func<int, Predicate<Person>>((int vaL)=> (Person P) => P.Age >= vaL),
+            ["AgeLT"] = new Func<int, Predicate<Person>>((int vaL) => (Person P) => P.Age < vaL),
+            ["ComforGTO"] = new Func<int, Predicate<Person>>((int vaL) => (Person P) => P.Comfort >= vaL),
+            ["ComfortLT"] = new Func<int, Predicate<Person>>((int vaL) => (Person P) => P.Comfort < vaL),
+        };
+
+        public Dictionary<string, Func<int, Func<Person, bool>>> evalRules2 = new Dictionary<string, Func<int, Func<Person, bool>>>()
+        {
+            ["AgeGTO"] = new Func<int, Func<Person, bool>>((int vaL) => (Person P) => P.Age >= vaL),
+            ["AgeLT"] = new Func<int, Func<Person, bool>>((int vaL) => (Person P) => P.Age < vaL),
+            ["ComforGTO"] = new Func<int, Func<Person, bool>>((int vaL) => (Person P) => P.Comfort >= vaL),
+            ["ComfortLT"] = new Func<int, Func<Person, bool>>((int vaL) => (Person P) => P.Comfort < vaL),
         };
 
 
         public Dictionary<int, Tuple<string, int>[]> RuleSet = new Dictionary<int, Tuple<string, int>[]>()
         {
-            [1] = new Tuple<string, int>[] { new Tuple<string, int>("AgeGreaterThan", 20) },
+            [1] = new Tuple<string, int>[] { new Tuple<string, int>("AgeGTO", 20) },
             [2] = new Tuple<string, int>[] { new Tuple<string, int>("ComfortLessThan", 5) }
         };
 
+
+        
         //public Dictionary<int, >
 
 
@@ -84,7 +95,7 @@ namespace WpfTestApp
             }, null, false);
             _filterPeopleCommand = new WPFCommand(new Action(filterSelectedAction), null, false);
             //_peopleList.CollectionChanged += delegate(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) { _removePersonCommand.RaiseCanExecuteChanged(); };
-
+            PanicRules.CompileRules();
 
         }
 
@@ -138,10 +149,25 @@ namespace WpfTestApp
 
                     //Console.WriteLine(preComb(SelectedPerson) && treComb(SelectedPerson));
 
-                    Predicate<Person> moCap = evalRules["AgeGreaterThan"](15);
-                    Predicate<Person> toCap = evalRules["AgeLessThan"](20);
+                    //Predicate<Person> moCap = evalRules["AgeGTO"](15);
+                    //Predicate<Person> toCap = evalRules["AgeLT"](20);
 
-                    Console.WriteLine($"{moCap(SelectedPerson)} aw {toCap(SelectedPerson)}");
+
+                    //Expression<Func<Person, bool>> soCap = (Person P) => P.Age > 20;
+                    //Expression<Predicate<Person>> utCap = (Person P) => P.Age > 20;
+                    
+                    //Console.WriteLine($"{moCap(SelectedPerson)} aw {toCap(SelectedPerson)}");
+
+                    //var Predicate = PredicateBuilder.False<Person>();
+                    //Predicate = Predicate.Or((Person p) => p.Age > 20);
+                    //Predicate = Predicate.Or(soCap);
+
+                    //Func<Person, bool> Tredicate = Predicate.Compile();
+                    //Console.WriteLine(Tredicate.Invoke(SelectedPerson));
+                    if(SelectedPerson!=null && PanicRules.CompiledRules.ContainsKey(SelectedPerson.Type))
+                    {
+                        Console.WriteLine(PanicRules.CompiledRules[SelectedPerson.Type].Invoke(SelectedPerson));
+                    }
 
                 }
             }
