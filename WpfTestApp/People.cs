@@ -23,7 +23,7 @@ namespace WpfTestApp
 
 
         public Person addPerson() {
-            Person newPerson = new Person() { Name = String.Format("{0}abe {1}", (char)('A' + new Random().Next(0, 26)), new Random().Next(1000,5000).ToString() ), Occupation = "Job " + (++countIndex), Age = new Random().Next(2, 70), Comfort = new Random().Next(1, 10), Type = new Random().Next(1, 3) };
+            Person newPerson = new Person() { Name = String.Format("{0}abe {1}", (char)('A' + new Random().Next(0, 26)), new Random().Next(1000,5000).ToString() ), Occupation = "Job " + (++countIndex), Age = new Random().Next(2, 70), Comfort = new Random().Next(1, 11), Type = new Random().Next(1, 4) };
             this.Add(newPerson);
             return newPerson;
             }

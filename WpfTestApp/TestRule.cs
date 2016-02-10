@@ -16,10 +16,10 @@ namespace WpfTestApp
 
         public TestRule(int? _AgeBiggerOrEqual = null, int? _AgeSmaller = null, int? _ComfortBiggerOrEqual = null, int? _ComfortLessThan = null)
         {
-            _AgeBiggerOrEqual = AgeBiggerOrEqual;
-            _AgeSmaller = AgeSmaller;
-            _ComfortBiggerOrEqual = ComfortBiggerOrEqual;
-            _ComfortLessThan = ComfortLessThan;
+            AgeBiggerOrEqual = _AgeBiggerOrEqual;
+            AgeSmaller = _AgeSmaller;
+            ComfortBiggerOrEqual = _ComfortBiggerOrEqual;
+            ComfortLessThan = _ComfortLessThan;
         }
     }
 
@@ -37,16 +37,16 @@ namespace WpfTestApp
         {
             [1] = new Dictionary<string, int>[]
             {
-                new Dictionary<string, int>() {["AgeGTO"] = 20,["ComfortLT"] = 5 }
+                new Dictionary<string, int>() {["AgeGTO"] = 80, ["ComfortLT"] = 2 }
             },
             [2] = new Dictionary<string, int>[]
             {
-                new Dictionary<string, int>() {["ComfortGTO"] = 3 }
+                new Dictionary<string, int>() {["ComfortGTO"] = 9 }
             },
             [3] = new Dictionary<string, int>[]
             {
-                new Dictionary<string, int>() {["AgeLT"] = 30},
-                new Dictionary<string, int>() {["ComfortGTO"]= 5}
+                new Dictionary<string, int>() {["AgeLT"] = 50},
+                new Dictionary<string, int>() {["ComfortLT"]= 4}
             }
         };
 
@@ -75,7 +75,7 @@ namespace WpfTestApp
                 }
 
                 CompiledRules.Add(Rule.Key, Predicate.Compile());
-
+                Console.WriteLine(Predicate.Compile());
             }
         }
 
