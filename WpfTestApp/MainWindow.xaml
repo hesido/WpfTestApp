@@ -336,7 +336,7 @@
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup"/>
         </VisualStateManager.VisualStateGroups>
-        <ListBox x:Name="listBox" Margin="37,42,0,104" ItemsSource="{Binding PeopleList}" TabIndex="4" DisplayMemberPath="Name" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Width="135">
+        <ListBox x:Name="listBox" Margin="37,42,0,104" ItemsSource="{Binding superView}" TabIndex="4" DisplayMemberPath="Name" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Width="135">
             <ListBox.Effect>
                 <DropShadowEffect/>
             </ListBox.Effect>
@@ -435,5 +435,6 @@
                 <ee:SwirlEffect TwistAmount="0.2"/>
             </CheckBox.Effect>
         </CheckBox>
+        <ListBox x:Name="listBox1_Copy1" HorizontalAlignment="Left" Height="100" Margin="553,244,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding testDict}" />
     </Grid>
 </Window>

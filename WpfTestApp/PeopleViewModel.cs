@@ -16,11 +16,27 @@ namespace WpfTestApp
         private WPFCommand _removePersonCommand;
         private WPFCommand _addPersonCommand;
         private WPFCommand _filterPeopleCommand;
+        public ListCollectionView superView;
+        private Dictionary<string, int> bestDict { get; set; }
+        public Dictionary<string, int> testDict { get; set; }
+        private int ss = 1;
 
         public PeopleViewModel()
         {
+            bestDict = new Dictionary<string, int>()
+            {
+                {"hey", 1 },
+                {"bey", 24 }
+
+            };
+            superView = new ListCollectionView(PeopleList);
             _removePersonCommand = new WPFCommand(new Action<object> (removePersonAction), x => PeopleList.Count > 0);
-            _addPersonCommand = new WPFCommand(() => { SelectedPerson = PeopleList.addPerson(); Console.WriteLine(CheckSelectedPeople.Count); }, null, false);
+            _addPersonCommand = new WPFCommand(() => { SelectedPerson = PeopleList.addPerson();
+                bestDict.Add("ee"+(ss++).ToString(), 2);
+
+                testDict = bestDict.ToList().ToDictionary(x => x.Key, x => x.Value); //clone dictionary.
+                NotifyPropertyChanged("testDict");
+                Console.WriteLine(CheckSelectedPeople.Count); }, null, false);
             _filterPeopleCommand = new WPFCommand(new Action(filterSelectedAction), null, false);
             //_peopleList.CollectionChanged += delegate(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) { _removePersonCommand.RaiseCanExecuteChanged(); };
         }
