@@ -58,6 +58,83 @@ namespace WpfTestApp
             }
         }
 
+    }
+
+    class DataGridColumnControl
+    {
+        //Code from: https://dzone.com/articles/sync-multi-select-listbox
+        public static readonly DependencyProperty ColumnControlProperty =
+            DependencyProperty.RegisterAttached("ColumnControl", typeof(string[]), typeof(DataGridColumnControl),
+                new FrameworkPropertyMetadata((string[])null,
+                    new PropertyChangedCallback(Setup)));
+
+        public static string[] GetColumnControl(DependencyObject d)
+        {
+            return (string[])d.GetValue(ColumnControlProperty);
+        }
+
+        public static void SetColumnControl(DependencyObject d, string[] value)
+        {
+            d.SetValue(ColumnControlProperty, value);
+        }
+
+        /// <summary>
+        /// Handles changes to the SelectedItems property.
+        /// </summary>
+        //private static void OnSelectedItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        //{
+        //    var listBox = (ListBox)d;
+        //    ReSetSelectedItems(listBox);
+        //    listBox.SelectionChanged += delegate
+        //    {
+        //        ReSetSelectedItems(listBox);
+        //    };
+        //}
+
+
+        private static void Setup(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            Console.WriteLine("Setup yo {0}", e.NewValue);
+            DataGrid DataGr = (DataGrid)d;
+            DataGr.Height = 75;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Hohoho";
+            MyAttachedString.SetAttachedString(DataGr, "changed that string");
+            DataGr.Columns.Add(textColumn);
+
+        }
+
+   
+
+
+        //private static void ReSetSelectedItems(ListBox listBox)
+        //{
+        //    IList selectedItems = GetColumnNames(listBox);
+        //    selectedItems.Clear();
+        //    if (listBox.SelectedItems != null)
+        //    {
+        //        foreach (var item in listBox.SelectedItems)
+        //            selectedItems.Add(item);
+        //    }
+        //}
+
+
+    }
+
+    class MyAttachedString
+    {
+        public static readonly DependencyProperty AttachedStringProperty =
+            DependencyProperty.RegisterAttached("AttachedString", typeof(string), typeof(MyAttachedString), new PropertyMetadata(null));
+
+        public static string GetAttachedString(DependencyObject d)
+        {
+            return (string)d.GetValue(AttachedStringProperty);
+        }
+
+        public static void SetAttachedString(DependencyObject d, string value)
+        {
+            d.SetValue(AttachedStringProperty, value);
+        }
 
     }
 }

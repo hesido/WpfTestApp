@@ -336,6 +336,7 @@
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup"/>
         </VisualStateManager.VisualStateGroups>
+        <DataGrid local:DataGridColumnControl.ColumnControl="{Binding ColSTR}" local:MyAttachedString.AttachedString="Testament" Width="200" Height="100" Margin="347,268,134,10"> </DataGrid>
         <ListBox x:Name="listBox" Margin="37,42,0,104" ItemsSource="{Binding superView}" TabIndex="4" DisplayMemberPath="Name" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Width="135">
             <ListBox.Effect>
                 <DropShadowEffect/>

@@ -13,6 +13,13 @@ namespace WpfTestApp
     class PeopleViewModel : PeopleViewModelEntity
     {
 
+
+        private string[] _ColSTR = { "32", "fefe", "few" };
+        public string[] ColSTR
+        {
+            get { return _ColSTR;}
+            set { _ColSTR = value; NotifyPropertyChanged("ColSTR"); }
+        }
         private WPFCommand _removePersonCommand;
         private WPFCommand _addPersonCommand;
         private WPFCommand _filterPeopleCommand;
@@ -129,6 +136,8 @@ namespace WpfTestApp
         {
             _checkSelectedPeople = new People(PeopleList.Where((p) => p.IsSelected).ToList());
             NotifyPropertyChanged("CheckSelectedPeople");
+            Console.WriteLine("cudud");
+            ColSTR = new string[] { "fe", "f2" };
         }
     }
 }
