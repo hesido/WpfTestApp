@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This file is compatible with Silverlight-->
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Name="svg2" Width="744.09448819" Height="1052.3622047">
+    <Canvas.RenderTransform>
+        <TranslateTransform X="0" Y="0"/>
+    </Canvas.RenderTransform>
+    <Canvas.Resources/>
+    <!--Unknown tag: sodipodi:namedview-->
+    <!--Unknown tag: metadata-->
+    <Canvas Name="layer1">
+        <Viewbox Height="86" Stretch="Fill" Width="103" Canvas.Left="202" Canvas.Top="62">
+            <Grid Height="86" Width="103">
+                <Ellipse xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3336" Fill="#FFFF0000" StrokeThickness="1" Stroke="#FF000000" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Margin="0,0,17,0"/>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3343" Fill="#FFFFFF00" StrokeThickness="1" Stroke="#FF000000" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 222.23356 197.77315 -16.17145 -5.48389 -13.68534 10.21275 0.21824 -17.07458 -13.9419 -9.85962 16.30633 -5.06878 5.06877 -16.30632 9.85962 13.9419 17.07458 -0.21824 -10.21275 13.68534 z" Stretch="Fill" Margin="27,0,0,21"/>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3345" Fill="#FFFFFF00" StrokeThickness="1" Stroke="#FF000000" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Data="m 209.10157 195.75285 -5.95309 -9.03084 -10.8143 -0.21571 6.74924 -8.45241 -3.13666 -10.35166 10.12436 3.80696 8.87573 -6.18198 -0.49204 10.80525 8.62216 6.53099 -10.42845 2.87105 z" Stretch="Fill" Margin="0,11,62,32"/>
+            </Grid>
+        </Viewbox>
+    </Canvas>
+</Canvas>
