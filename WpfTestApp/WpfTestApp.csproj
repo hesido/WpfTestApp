@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="KeyToCommand.cs" />
     <Compile Include="DataStore\DataStore\DataStore.xaml.cs">
       <DependentUpon>DataStore.xaml</DependentUpon>
     </Compile>

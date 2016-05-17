@@ -23,6 +23,10 @@ namespace WpfTestApp
         private WPFCommand _removePersonCommand;
         private WPFCommand _addPersonCommand;
         private WPFCommand _filterPeopleCommand;
+
+        public WPFCommand TestCommand { get; }
+
+        public RoutedCommand MyRoutedCommand { get; }
         public ListCollectionView superView;
         private Dictionary<string, int> bestDict { get; set; }
         public Dictionary<string, int> testDict { get; set; }
@@ -37,6 +41,9 @@ namespace WpfTestApp
 
             };
             superView = new ListCollectionView(PeopleList);
+            TestCommand = new WPFCommand((testString) => Console.WriteLine("invoked!" + testString));
+            MyRoutedCommand = new RoutedCommand();
+
             _removePersonCommand = new WPFCommand(new Action<object> (removePersonAction), x => PeopleList.Count > 0);
             _addPersonCommand = new WPFCommand(() => { SelectedPerson = PeopleList.addPerson();
                 bestDict.Add("ee"+(ss++).ToString(), 2);

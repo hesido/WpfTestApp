@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTestApp"
-        xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" x:Name="window" x:Class="WpfTestApp.MainWindow"
+        xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-
+    xmlns:Custom="http://www.galasoft.ch/mvvmlight" x:Name="window" x:Class="WpfTestApp.MainWindow"
     mc:Ignorable="d"
         Title="MainWindow" Height="408.937" Width="690.738" Loaded="Window_Loaded">
     <Window.Resources>
@@ -314,6 +314,8 @@
                 <SplineDoubleKeyFrame KeyTime="0:0:1" Value="10" KeySpline="0,1,1,0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Style x:Key="RunCommandOnEnter" TargetType="{x:Type TextBox}">
+        </Style>
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="UIElement.GotFocus" SourceName="MeineText"/>
@@ -324,11 +326,11 @@
             <BeginStoryboard x:Name="Swirler_BeginStoryboard" Storyboard="{StaticResource Swirler}"/>
         </EventTrigger>
     </Window.Triggers>
-    <i:Interaction.Triggers>
-        <ei:KeyTrigger Key="Return">    
-            <ei:ControlStoryboardAction Storyboard="{StaticResource Swirler}" />
+    <!--<i:Interaction.Triggers>
+        <ei:KeyTrigger Key="Return" SourceName="MeineText" SourceObject="{Binding ElementName=MeineText}">
+            <i:InvokeCommandAction Command="{Binding TestCommand, Mode=OneWay}" CommandParameter="{Binding ColSTR}"/>
         </ei:KeyTrigger>
-    </i:Interaction.Triggers>
+    </i:Interaction.Triggers>-->
     <Window.DataContext>
         <local:PeopleViewModel x:Name="viewModel" />
     </Window.DataContext>
@@ -336,7 +338,7 @@
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup"/>
         </VisualStateManager.VisualStateGroups>
-        <DataGrid local:DataGridColumnControl.ColumnControl="{Binding ColSTR}" local:MyAttachedString.AttachedString="Testament" Width="200" Height="100" Margin="347,268,134,10"> </DataGrid>
+        <DataGrid local:DataGridColumnControl.ColumnControl="{Binding ColSTR}" local:MyAttachedString.AttachedString="Testament" Width="200" Height="100" Margin="347,268,134,10"/>
         <ListBox x:Name="listBox" Margin="37,42,0,104" ItemsSource="{Binding superView}" TabIndex="4" DisplayMemberPath="Name" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Width="135">
             <ListBox.Effect>
                 <DropShadowEffect/>
@@ -365,6 +367,7 @@
         </Button>
         <Button x:Name="RemovePersonButton" Content="Remove Person" HorizontalAlignment="Left" Margin="37,304,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding RemovePersonCommand, Mode=OneWay}" CommandParameter="{Binding SelectedPerson}"/>
         <ComboBox x:Name="comboBoxRaw" SelectedItem="{Binding SelectedPerson}" HorizontalAlignment="Left" Height="37" Margin="240,104,0,0" VerticalAlignment="Top" Width="163" ItemsSource="{Binding PeopleList}">
+
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
@@ -394,6 +397,11 @@
                     </TextBlock>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="KeyDown">
+                    <Custom:EventToCommand/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ComboBox>
         <Expander Style="{StaticResource FocusExpand}" x:Name="expander" HorizontalAlignment="Left" Margin="189,218,0,0" VerticalAlignment="Top" Width="176">
             <Expander.Header>
@@ -430,7 +438,13 @@
         </Expander>
         <ListBox x:Name="listBox1_Copy" HorizontalAlignment="Left" Height="100" Margin="553,10,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding CheckSelectedPeople}" DisplayMemberPath="Name" />
         <Button x:Name="FilterSelected" Content="Filter Selected" HorizontalAlignment="Left" Margin="427,193,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding FilterPeopleCommand, Mode=OneWay}"/>
-        <TextBox x:Name="MeineText" HorizontalAlignment="Left" Height="23" Margin="427,160,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="MeineText" HorizontalAlignment="Left" Height="23" Margin="427,160,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <Custom:EventToCommand/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
         <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="209,42,0,0" Style="{DynamicResource SimpleCheckBox}" VerticalAlignment="Top">
             <CheckBox.Effect>
                 <ee:SwirlEffect TwistAmount="0.2"/>
