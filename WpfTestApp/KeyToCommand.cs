@@ -49,7 +49,7 @@ namespace WpfTestApp
             DependencyObject d = (DependencyObject)source;
             ICommand toExecute = GetCommand(d);
             if (e.Key == GetKeyName(d))
-            toExecute?.Execute(null);
+            toExecute?.Execute(((FrameworkElement)d).Name);
         }
     }
 }

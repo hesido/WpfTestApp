@@ -319,7 +319,7 @@
         </Style>
     </Window.Resources>
     <Window.Triggers>
-        <EventTrigger RoutedEvent="UIElement.GotFocus" SourceName="MeineText"/>
+
         <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="expander_Copy"/>
         <EventTrigger RoutedEvent="UIElement.GotFocus"/>
         <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="expander_Copy"/>
@@ -439,7 +439,7 @@
         </Expander>
         <ListBox x:Name="listBox1_Copy" HorizontalAlignment="Left" Height="100" Margin="553,10,0,0" VerticalAlignment="Top" Width="100" ItemsSource="{Binding CheckSelectedPeople}" DisplayMemberPath="Name" />
         <Button x:Name="FilterSelected" Content="Filter Selected" HorizontalAlignment="Left" Margin="427,193,0,0" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.5,0.5" Command="{Binding FilterPeopleCommand, Mode=OneWay}"/>
-        <TextBox local:KeyToCommand.Command="{Binding TestCommand}" local:KeyToCommand.KeyName="Enter"  Name="MeineText" HorizontalAlignment="Left" Height="23" Margin="427,160,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120">
+        <TextBox local:KeyToCommand.Command="{Binding TestCommand}" local:KeyToCommand.KeyName="Enter" HorizontalAlignment="Left" Height="23" Margin="427,160,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120">
 
         </TextBox>
         <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="209,42,0,0" Style="{DynamicResource SimpleCheckBox}" VerticalAlignment="Top">

@@ -41,7 +41,7 @@ namespace WpfTestApp
 
             };
             superView = new ListCollectionView(PeopleList);
-            TestCommand = new WPFCommand((testString) => Console.WriteLine("invoked!" + testString));
+            TestCommand = new WPFCommand((testString) => { Console.WriteLine("invoked!" + testString); Console.WriteLine((testString as string) == string.Empty); });
             MyRoutedCommand = new RoutedCommand();
 
             _removePersonCommand = new WPFCommand(new Action<object> (removePersonAction), x => PeopleList.Count > 0);
