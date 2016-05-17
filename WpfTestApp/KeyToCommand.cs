@@ -10,33 +10,33 @@ namespace WpfTestApp
 {
     class KeyToCommand
     {
-        public static readonly DependencyProperty EnterKeyToCommandProperty =
-            DependencyProperty.RegisterAttached("EnterKeyToCommand", typeof(ICommand), typeof(KeyToCommand), new FrameworkPropertyMetadata((ICommand)null, new PropertyChangedCallback(OnEnterKeyToCommandPropertyChanged)));
+        public static readonly DependencyProperty CommandProperty =
+            DependencyProperty.RegisterAttached("Command", typeof(ICommand), typeof(KeyToCommand), new FrameworkPropertyMetadata((ICommand)null, new PropertyChangedCallback(OnCommandPropertyChanged)));
 
-        public static void SetEnterKeyToCommand(DependencyObject d, ICommand c)
+        public static void SetCommand(DependencyObject d, ICommand c)
         {
-            d.SetValue(EnterKeyToCommandProperty, c);
+            d.SetValue(CommandProperty, c);
         }
 
-        public static ICommand GetEnterKeyToCommand(DependencyObject d)
+        public static ICommand GetCommand(DependencyObject d)
         {
-            return (ICommand)d.GetValue(EnterKeyToCommandProperty);
+            return (ICommand)d.GetValue(CommandProperty);
         }
 
-        public static readonly DependencyProperty WhichKeyProperty =
-            DependencyProperty.RegisterAttached("WhichKey", typeof(Key?), typeof(KeyToCommand), new FrameworkPropertyMetadata((Key?)null));
+        public static readonly DependencyProperty KeyNameProperty =
+            DependencyProperty.RegisterAttached("KeyName", typeof(Key?), typeof(KeyToCommand), new FrameworkPropertyMetadata((Key?)null));
 
-        public static void SetWhichKey(DependencyObject d, Key? k)
+        public static void SetKeyName(DependencyObject d, Key? k)
         {
-            d.SetValue(WhichKeyProperty, k);
+            d.SetValue(KeyNameProperty, k);
         }
 
-        public static Key? GetWhichKey(DependencyObject d)
+        public static Key? GetKeyName(DependencyObject d)
         {
-            return (Key?)d.GetValue(WhichKeyProperty);
+            return (Key?)d.GetValue(KeyNameProperty);
         }
 
-        private static void OnEnterKeyToCommandPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnCommandPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             UIElement uiEl = (UIElement)d;
             uiEl.KeyDown -= invokeCommand;
@@ -47,8 +47,8 @@ namespace WpfTestApp
         private static void invokeCommand(object source, KeyEventArgs e)
         {
             DependencyObject d = (DependencyObject)source;
-            ICommand toExecute = GetEnterKeyToCommand(d);
-            if (e.Key == GetWhichKey(d))
+            ICommand toExecute = GetCommand(d);
+            if (e.Key == GetKeyName(d))
             toExecute?.Execute(null);
         }
     }
