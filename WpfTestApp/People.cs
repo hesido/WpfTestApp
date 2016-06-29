@@ -18,7 +18,7 @@ namespace WpfTestApp
 
         public People(List<Person> personList) : base(personList)
         {
-            //Accomodate base constructor to create an observable collection out of a list
+            //Accommodate base constructor to create an observable collection out of a list
         }
 
 
